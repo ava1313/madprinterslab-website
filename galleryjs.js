@@ -7,51 +7,52 @@
         <option value="category6">Learning</option>
         <option value="category7">Tools</option>
         <option value="category8">Toys & Games</option>
-        <option value="category9">Other</option>*/
+        <option value="category9">Figures</option>
+        <option value="category10">Other</option>*/
 
 
 const imagesData = [
   {
     url: 'https://i.imgur.com/I05ezow.jpg',
-    category: 'Gadgets',
+    category: 'category3',
     name: 'Koomba',
     tags: ['super', 'mario', 'keychain'],
   },
   {
     url: 'https://i.imgur.com/1W0OEYL.jpg',
-    category: 'category2',
+    category: 'category9',
     name: 'Espeon',
     tags: ['psychic', 'pokemon', 'figure'],
   },
   {
     url: 'https://i.imgur.com/JXYNrJi.jpg',
-    category: 'category2',
+    category: 'category9',
     name: 'Solaire',
     tags: ['Dark', 'Darksouls', 'figure'],
   },
   {
     url: 'https://i.imgur.com/7N7uvxP.jpg',
-    category: 'category2',
+    category: 'category9',
     name: 'Siegmeyer',
     tags: ['armor', 'darksouls', 'figure'],
   },
   {
     url: 'https://i.imgur.com/MaRocAS.jpg',
-    category: 'category2',
+    category: 'category9',
     name: 'Sif',
     tags: ['wold', 'darksouls', 'tomb', 'rock', 'sword'],
   },
   {
     url: 'https://i.imgur.com/fNcr30Y.jpg',
-    category: 'category2',
+    category: 'category9',
     name: 'Charizard',
     tags: ['fire', 'pokemon', 'figure'],
   },
   {
     url: 'https://i.imgur.com/prM4rrw.jpg',
-    category: 'category2',
+    category: 'category9',
     name: 'Arnold',
-    tags: ['predator', 'cigar', 'army'],
+    tags: ['predator', 'cigar', 'army', 'figure'],
   },
 ];
 
@@ -60,6 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const searchInput = document.getElementById('search');
   searchInput.addEventListener('input', filterImages);
+
+  const categoriesDropdown = document.getElementById('categories');
+  categoriesDropdown.addEventListener('change', filterImages);
 });
 
 function loadImages() {
@@ -98,6 +102,7 @@ function createGalleryItem(imageUrl, itemCategory, imageName, tags) {
 
 function filterImages() {
   const searchInput = document.getElementById("search").value.toLowerCase();
+  const selectedCategory = document.getElementById("categories").value;
   const galleryItems = document.querySelectorAll(".gallery-item");
 
   galleryItems.forEach((item) => {
@@ -105,18 +110,17 @@ function filterImages() {
     const itemCategory = item.getAttribute("data-category").toLowerCase();
     const itemTags = item.getAttribute("data-tags").toLowerCase();
 
-    if (
-      searchInput === "" ||
-      itemName.includes(searchInput) ||
-      itemCategory.includes(searchInput) ||
-      itemTags.includes(searchInput)
-    ) {
+    const categoryMatch = selectedCategory === "all" || itemCategory === selectedCategory.toLowerCase();
+    const searchMatch = searchInput === "" || itemName.includes(searchInput) || itemTags.includes(searchInput);
+
+    if (categoryMatch && searchMatch) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
     }
   });
 }
+
 
 function openModal(element) {
   const modal = document.getElementById('modal');
