@@ -71,6 +71,7 @@ nav ul li a {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(.25, .8, .25,1);
   overflow: hidden;
+  transition: transform 0.3s, opacity 0.3s;
   }
   
   .gallery-item:hover {
@@ -159,4 +160,49 @@ select {
 select:focus {
   outline: none;
 }
-/*
+#categories {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+}
+#categories option {
+  background-color: white;
+  color: black;
+}
+/* Media Queries for Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  nav ul li {
+    margin-left: 0;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  #search {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .gallery-grid {
+    gap: 1rem;
+    margin: 1rem;
+  }
+}
