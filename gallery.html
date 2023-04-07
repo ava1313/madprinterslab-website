@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="gallerycss.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Logo</a>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search by name or tag...">
+      <select id="categories">
+        <option value="all">All Categories</option>
+        <option value="category1">Art</option>
+        <option value="category2">Fashion</option>
+        <option value="category3">Gadgets</option>
+        <option value="category4">Hobby</option>
+        <option value="category5">Household</option>
+        <option value="category6">Learning</option>
+        <option value="category7">Tools</option>
+        <option value="category8">Toys & Games</option>
+        <option value="category9">Other</option>
+      </select>
+    </div>
+    <div class="gallery-grid" id="gallery"></div>
+  </main>
+  <div class="modal" id="modal" onclick="closeModal()">
+    <div class="modal-content">
+      <span class="close" id="close">&times;</span>
+      <img class="modal-image" alt="">
+      <div class="modal-description">
+        <h3 class="image-name"></h3>
+        <p class="image-category"></p>
+      </div>
+    </div>
+  </div>
+  <script src="galleryjs.js"></script>
+</body>
+
+</html>
