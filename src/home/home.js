@@ -37,13 +37,4 @@ function closeModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'none';
 }
-function adminLogin() {
-  const password = prompt("Please enter the admin password:");
-
-  if (password === "agiosnikolaos") {
-    window.location.href = "admin.html";
-  } else {
-    alert("Incorrect password. Access denied.");
-  }
-}
 });
