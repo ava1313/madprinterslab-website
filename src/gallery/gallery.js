@@ -16,7 +16,7 @@ const imagesData = [
     url: 'https://i.imgur.com/I05ezow.jpg',
     category: 'category3',
     name: 'Koomba',
-    tags: ['super', 'mario', 'keychain'],
+    tags: ['super', 'mario', 'keychain', 'super_mario'],
   },
   {
     url: 'https://i.imgur.com/1W0OEYL.jpg',
@@ -115,8 +115,12 @@ function filterImages() {
 
     if (categoryMatch && searchMatch) {
       item.style.display = "block";
+      item.style.opacity = "1";
+      item.style.transform = "scale(1)";
     } else {
       item.style.display = "none";
+      item.style.opacity = "0";
+      item.style.transform = "scale(0.5)";
     }
   });
 }
