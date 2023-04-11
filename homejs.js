@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     filterGallery(this.value);
   });
 
-  function c(selectedCategory) {
+  function filterGallery(selectedCategory) {
     const galleryItems = document.querySelectorAll(".gallery-item");
 
     galleryItems.forEach((item) => {
@@ -19,31 +19,35 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-function openModal(element) {
-  const modal = document.getElementById('modal');
-  const modalImage = modal.querySelector('.modal-image');
-  const modalDescription = modal.querySelector('.modal-description');
 
-  const imgSrc = element.querySelector('img').src;
-  const description = element.querySelector('p').textContent;
+  function openModal(element) {
+    const modal = document.getElementById('modal');
+    const modalImage = modal.querySelector('.modal-image');
+    const modalDescription = modal.querySelector('.modal-description');
 
-  modalImage.src = imgSrc;
-  modalDescription.textContent = description;
+    const imgSrc = element.querySelector('img').src;
+    const description = element.querySelector('p').textContent;
 
-  modal.style.display = 'block';
-}
+    modalImage.src = imgSrc;
+    modalDescription.textContent = description;
 
-function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-}
-function adminLogin() {
-  const password = prompt("Please enter the admin password:");
-
-  if (password === "agiosnikolaos") {
-    window.location.href = "admin.html";
-  } else {
-    alert("Incorrect password. Access denied.");
+    modal.style.display = 'block';
   }
-}
+
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+  }
+
+  const closeButton = document.querySelector(".close");
+  closeButton.addEventListener("click", closeModal);
+
+  // Add these lines to enable modal for featured content and bestseller images
+  const featuredContentItems = document.querySelectorAll(".content-item");
+  featuredContentItems.forEach((item) => {
+    item.addEventListener("click", () => openModal(item));
+  });
+
+  const bestsellerItem = document.querySelector(".bestseller");
+  bestsellerItem.addEventListener("click", () => openModal(bestsellerItem));
 });
