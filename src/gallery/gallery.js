@@ -13,7 +13,7 @@
 
 const imagesData = [
   {
-    url: 'https://i.imgur.com/I05ezow.jpg',
+    url: '../../assets/goomba.jpg',
     category: 'category3',
     name: 'Koomba',
     tags: ['super', 'mario', 'keychain', 'super_mario'],
