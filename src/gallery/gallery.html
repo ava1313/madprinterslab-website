@@ -6,12 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery</title>
   <link rel="stylesheet" href="gallery.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 
 <body>
   <header>
     <nav>
-      <a href="../../index.html" class="logo">Logo</a>
+      <a href="../../index.html" class="logo">
+        <img src="../../assets/Logo.png">
+      </a>
+      
       <ul>
         <li><a href="../home/home.html">Home</a></li>
         <li><a href="gallery.html">Gallery</a></li>
@@ -33,7 +37,6 @@
         <option value="category8">Toys & Games</option>
         <option value="category9">Figures</option>
         <option value="category10">Other</option>
-
       </select>
     </div>
     <div class="gallery-grid" id="gallery"></div>
@@ -46,6 +49,11 @@
         <h3 class="image-name"></h3>
         <p class="image-category"></p>
       </div>
+      <div class="modal-arrow left-arrow" onclick="previousImage()">&lt;</div>
+      <div class="modal-arrow right-arrow" onclick="nextImage()">&gt;</div>
+
+      <div class="modal-social-media"></div> <!-- Added this line -->
+   
     </div>
   </div>
   <script src="gallery.js"></script>

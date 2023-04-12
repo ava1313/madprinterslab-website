@@ -8,12 +8,14 @@
 }
 
 body {
-  background-color: #f0f0f0;
+  background-color: #e4e4e4;
 }
 
 header {
   background-color: #4CAF50;
   padding: 1rem;
+  /* Add this */
+  animation: colorful-bg 10s linear infinite;
 }
 
 nav {
@@ -22,11 +24,11 @@ nav {
   align-items: center;
 }
 
-.logo {
-  color: white;
-  font-size: 1.5rem;
-  text-decoration: none;
+.logo img {
+  max-width: 150px;
+  height: auto;
 }
+
 
 nav ul {
   list-style: none;
@@ -40,6 +42,7 @@ nav ul li {
 nav ul li a {
   color: white;
   text-decoration: none;
+  font-size: 30px;
 }
 
 .search-container {
@@ -71,24 +74,30 @@ nav ul li a {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(.25, .8, .25,1);
   overflow: hidden;
+  /* Add this */
+  transform: scale(1);
+  opacity: 1;
   transition: transform 0.3s, opacity 0.3s;
-  }
-  
-  .gallery-item:hover {
+}
+
+.gallery-item:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  }
-  
-  .gallery-item img {
+  /* Add this */
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+.gallery-item img {
   width: 100%;
   height: auto;
-  }
-  
-  .gallery-item p {
+}
+
+.gallery-item p {
   text-align: center;
   padding: 0.5rem;
-  }
-  
-  .modal {
+}
+
+.modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -98,9 +107,9 @@ nav ul li a {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
   position: relative;
   background-color: #fff;
   margin: 15% auto;
@@ -108,43 +117,48 @@ nav ul li a {
   border: 1px solid #888;
   width: 80%;
   max-width: 500px;
-  }
-  
-  .close {
+}
+
+.close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  }
-  
-  .modal-image {
+}
+
+.modal-image {
   width: 100%;
   height: auto;
-  }
-  
-  .modal-description {
-  text-align: left;
-  margin-top: 1rem;
-  }
-  
-  .image-name {
+}
+
+.modal-description {
+  text-align: center;
+}
+
+.modal-description h3 {
+  font-size: 24px;
+  margin-bottom: 10px; /* Add this line */
+}
+
+
+.image-name {
   font-size: 1.2rem;
   font-weight: 700;
-  }
-  
-  .image-category {
+}
+
+.image-category {
   font-size: 1rem;
   font-weight: 400;
-  }
-/* Add this to your existing CSS file */
+}
+
 /* Dropdown styling */
 select {
   appearance: none;
@@ -173,6 +187,16 @@ select:focus {
   background-color: white;
   color: black;
 }
+
+/* Add this to create the colorful-bg animation */
+@keyframes colorful-bg {
+  0%   { background-color: #4CAF50; }
+  /*25%  { background-color: #2196F3; }
+  50%  { background-color: #FF5722; }
+  75%  { background-color: #FFEB3B; }
+  100% { background-color: #4CAF50; }*/
+}
+
 /* Media Queries for Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   header {
@@ -205,4 +229,70 @@ select:focus {
     gap: 1rem;
     margin: 1rem;
   }
+}
+.social-media-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.social-media-button {
+  color: #4caf50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.social-media-button:hover {
+  opacity: 0.8;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.modal-description h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #4CAF50;
+  animation: bounce 2s infinite;
+}
+.modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0.7;
+  user-select: none;
+}
+
+.modal-arrow:hover {
+  opacity: 1;
+}
+
+.left-arrow {
+  left: 30px;
+  
+}
+
+.right-arrow {
+  right: 30px;
 }

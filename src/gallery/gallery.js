@@ -11,51 +11,65 @@
         <option value="category10">Other</option>*/
 
 
-const imagesData = [
-  {
-    url: '../../assets/goomba.jpg',
-    category: 'category3',
-    name: 'Koomba',
-    tags: ['super', 'mario', 'keychain', 'super mario'],
-  },
-  {
-    url: 'https://i.imgur.com/1W0OEYL.jpg',
-    category: 'category9',
-    name: 'Espeon',
-    tags: ['psychic', 'pokemon', 'figure'],
-  },
-  {
-    url: 'https://i.imgur.com/JXYNrJi.jpg',
-    category: 'category9',
-    name: 'Solaire',
-    tags: ['Dark', 'Darksouls', 'figure'],
-  },
-  {
-    url: 'https://i.imgur.com/7N7uvxP.jpg',
-    category: 'category9',
-    name: 'Siegmeyer',
-    tags: ['armor', 'darksouls', 'figure'],
-  },
-  {
-    url: 'https://i.imgur.com/MaRocAS.jpg',
-    category: 'category9',
-    name: 'Sif',
-    tags: ['wold', 'darksouls', 'tomb', 'rock', 'sword'],
-  },
-  {
-    url: 'https://i.imgur.com/fNcr30Y.jpg',
-    category: 'category9',
-    name: 'Charizard',
-    tags: ['fire', 'pokemon', 'figure'],
-  },
-  {
-    url: 'https://i.imgur.com/prM4rrw.jpg',
-    category: 'category9',
-    name: 'Arnold',
-    tags: ['predator', 'cigar', 'army', 'figure'],
-  },
-];
-
+        const imagesData = [
+          {
+            url: 'https://i.imgur.com/TlJtab6.png',
+            secondaryUrl: 'https://i.imgur.com/jqV3vJe.png',
+            tertiaryUrl: 'https://i.imgur.com/JXYNrJi.jpg',
+            category: 'category3',
+            name: 'Koomba',
+            tags: ['super', 'mario', 'keychain', 'super mario'],
+          },
+          {
+            url: 'https://i.imgur.com/NRW3OMm.png',
+            secondaryUrl: 'https://i.imgur.com/7N7uvxP.jpg',
+            tertiaryUrl: 'https://i.imgur.com/MaRocAS.jpg',
+            category: 'category9',
+            name: 'Espeon',
+            tags: ['psychic', 'pokemon', 'figure'],
+          },
+          {
+            url: 'https://i.imgur.com/IM75f3t.png',
+            secondaryUrl: 'https://i.imgur.com/fNcr30Y.jpg',
+            tertiaryUrl: 'https://i.imgur.com/prM4rrw.jpg',
+            category: 'category9',
+            name: 'Solaire',
+            tags: ['Dark', 'Darksouls', 'figure'],
+          },
+          {
+            url: 'https://i.imgur.com/7iudYq4.png',
+            secondaryUrl: 'https://i.imgur.com/bsonGQt.png',
+            tertiaryUrl: 'https://i.imgur.com/2Axgdmk.png',
+            category: 'category9',
+            name: 'Siegmeyer',
+            tags: ['armor', 'darksouls', 'figure'],
+          },
+          {
+            url: 'https://i.imgur.com/V8041YB.png',
+            secondaryUrl: 'https://i.imgur.com/TlJtab6.png',
+            tertiaryUrl: 'https://i.imgur.com/NRW3OMm.png',
+            category: 'category9',
+            name: 'Sif',
+            tags: ['wold', 'darksouls', 'tomb', 'rock', 'sword'],
+          },
+          {
+            url: 'https://i.imgur.com/TAsg4tS.png',
+            secondaryUrl: 'https://i.imgur.com/IM75f3t.png',
+            tertiaryUrl: 'https://i.imgur.com/7iudYq4.png',
+            category: 'category9',
+            name: 'Charizard',
+            tags: ['fire', 'pokemon', 'figure'],
+          },
+          {
+            url: 'https://i.imgur.com/69Y9b5W.png',
+            secondaryUrl: 'https://i.imgur.com/V8041YB.png',
+            tertiaryUrl: 'https://i.imgur.com/TAsg4tS.png',
+            category: 'category9',
+            name: 'Arnold',
+            tags: ['predator', 'cigar', 'army', 'figure'],
+          },
+        ];
+        
 document.addEventListener('DOMContentLoaded', function () {
   loadImages();
 
@@ -80,12 +94,14 @@ function loadImages() {
   lazyLoadImages();
 }
 
+
 function createGalleryItem(imageUrl, itemCategory, imageName, tags) {
   const galleryItem = document.createElement('div');
   galleryItem.classList.add('gallery-item');
   galleryItem.setAttribute('data-category', itemCategory);
   galleryItem.setAttribute('data-tags', tags.join(','));
   galleryItem.setAttribute('onclick', 'openModal(this)');
+  galleryItem.dataset.imageData = JSON.stringify({ imageUrl, itemCategory, imageName, tags });
 
   const img = document.createElement('img');
   img.src = imageUrl;
@@ -99,6 +115,8 @@ function createGalleryItem(imageUrl, itemCategory, imageName, tags) {
 
   return galleryItem;
 }
+
+
 
 function filterImages() {
   const searchInput = document.getElementById("search").value.toLowerCase();
@@ -125,25 +143,44 @@ function filterImages() {
   });
 }
 
-
 function openModal(element) {
   const modal = document.getElementById('modal');
   const modalImage = modal.querySelector('.modal-image');
   const modalDescription = modal.querySelector('.modal-description');
+  const modalSocialMedia = modal.querySelector('.modal-social-media');
 
-  const imgSrc = element.querySelector('img').src;
-  const description = element.querySelector('p').textContent;
+  const imageData = JSON.parse(element.dataset.imageData);
+  const imgSrc = imageData.imageUrl;
+  const description = imageData.name;
 
   modalImage.src = imgSrc;
   modalDescription.textContent = description;
 
+  const socialMediaButtons = createSocialMediaButtons();
+  modalSocialMedia.innerHTML = ''; // Clear any existing social media buttons
+  modalSocialMedia.appendChild(socialMediaButtons); // Add new social media buttons
+
   modal.style.display = 'block';
+
+  // Prevent background clicks from closing the modal
+  modal.onclick = (event) => {
+    if (event.target === modal || event.target.id === 'close') {
+      closeModal();
+    }
+  };
 }
+
+
+
 
 function closeModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'none';
+  const socialMediaButtons = createSocialMediaButtons();
+modal.querySelector('.modal-description').appendChild(socialMediaButtons);
+
 }
+
 
 // Add event listeners for close button and modal background click
 document.getElementById('close').addEventListener('click', closeModal);
@@ -171,4 +208,70 @@ function lazyLoadImages() {
   }, options);
 
   images.forEach(img => observer.observe(img));
+}
+function createSocialMediaButtons() {
+  const container = document.createElement('div');
+  container.className = 'social-media-buttons';
+
+  const facebookButton = document.createElement('a');
+  facebookButton.href = 'https://www.facebook.com/marketplace/profile/100087950613870';
+  facebookButton.target = '_blank';
+  facebookButton.className = 'social-media-button';
+  facebookButton.innerHTML = '<i class="fab fa-facebook-f"></i>';
+
+  const tiktokButton = document.createElement('a');
+  tiktokButton.href = 'https://www.tiktok.com/@madprinterslab';
+  tiktokButton.target = '_blank';
+  tiktokButton.className = 'social-media-button';
+  tiktokButton.innerHTML = '<i class="fab fa-tiktok"></i>';
+
+  const instagramButton = document.createElement('a');
+  instagramButton.href = 'https://www.instagram.com/madprinterslab/';
+  instagramButton.target = '_blank';
+  instagramButton.className = 'social-media-button';
+  instagramButton.innerHTML = '<i class="fab fa-instagram"></i>';
+
+  container.appendChild(facebookButton);
+  container.appendChild(tiktokButton);
+  container.appendChild(instagramButton);
+
+  return container;
+}
+function nextImage() {
+  const modal = document.getElementById('modal');
+  const modalImage = modal.querySelector('.modal-image');
+  const additionalImages = JSON.parse(modal.dataset.additionalImages);
+  let currentImageIndex = parseInt(modal.dataset.currentImageIndex);
+
+  currentImageIndex = (currentImageIndex + 1) % additionalImages.length;
+  modalImage.src = additionalImages[currentImageIndex];
+  modal.dataset.currentImageIndex = currentImageIndex;
+}
+
+function previousImage() {
+  const modal = document.getElementById('modal');
+  const modalImage = modal.querySelector('.modal-image');
+  const additionalImages = JSON.parse(modal.dataset.additionalImages);
+  let currentImageIndex = parseInt(modal.dataset.currentImageIndex);
+
+  currentImageIndex = (currentImageIndex - 1 + additionalImages.length) % additionalImages.length;
+  modalImage.src = additionalImages[currentImageIndex];
+  modal.dataset.currentImageIndex = currentImageIndex;
+}
+function createModalArrows() {
+  const leftArrow = document.createElement('i');
+  leftArrow.classList.add('modal-arrow', 'modal-arrow-left');
+  leftArrow.innerHTML = '&#10094;';
+  leftArrow.addEventListener('click', () => {
+    changeImage(-1);
+  });
+
+  const rightArrow = document.createElement('i');
+  rightArrow.classList.add('modal-arrow', 'modal-arrow-right');
+  rightArrow.innerHTML = '&#10095;';
+  rightArrow.addEventListener('click', () => {
+    changeImage(1);
+  });
+
+  return [leftArrow, rightArrow];
 }
