@@ -76,7 +76,8 @@
             category: 'category9',
             name: 'Arnold',
             tags: ['predator', 'cigar', 'army', 'figure'],
-          },
+          }, 
+          
         ];
         
 document.addEventListener('DOMContentLoaded', function () {

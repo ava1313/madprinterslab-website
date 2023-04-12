@@ -50,12 +50,24 @@ nav ul li a {
   justify-content: center;
   align-items: center;
   margin: 1rem 0;
+  
 }
 
 #search {
   width: 300px;
   padding: 0.5rem;
   margin-right: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: border-color 0.3s;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+#search:focus {
+  border-color: #5e5ec5;
 }
 
 .gallery-grid {
