@@ -87,11 +87,11 @@ nav ul li a {
 h2 {
   font-size: 2rem;
   text-align: center;
-  color: white;
+  color: #4CAF50;
   margin-bottom: 1rem;
-  background-image: linear-gradient(to right, #4CAF50, #81C784);
+  
   background-clip: text;
-  -webkit-text-fill-color: transparent;
+  
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
