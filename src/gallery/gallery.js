@@ -14,56 +14,65 @@
         const imagesData = [
           {
             url: 'https://i.imgur.com/TlJtab6.png',
-            secondaryUrl: 'https://i.imgur.com/jqV3vJe.png',
-            tertiaryUrl: 'https://i.imgur.com/JXYNrJi.jpg',
+            secondaryUrls: [
+              'https://i.imgur.com/jqV3vJe.png',
+              
+            ],
             category: 'category3',
             name: 'Koomba',
             tags: ['super', 'mario', 'keychain', 'super mario'],
           },
           {
             url: 'https://i.imgur.com/NRW3OMm.png',
-            secondaryUrl: 'https://i.imgur.com/7N7uvxP.jpg',
-            tertiaryUrl: 'https://i.imgur.com/MaRocAS.jpg',
+            secondaryUrls: [
+              
+            ],
             category: 'category9',
             name: 'Espeon',
             tags: ['psychic', 'pokemon', 'figure'],
           },
           {
             url: 'https://i.imgur.com/IM75f3t.png',
-            secondaryUrl: 'https://i.imgur.com/fNcr30Y.jpg',
-            tertiaryUrl: 'https://i.imgur.com/prM4rrw.jpg',
+            secondaryUrls: [
+              'https://i.imgur.com/Mrlqz8p.png'
+            ],
             category: 'category9',
             name: 'Solaire',
             tags: ['Dark', 'Darksouls', 'figure'],
           },
           {
             url: 'https://i.imgur.com/7iudYq4.png',
-            secondaryUrl: 'https://i.imgur.com/bsonGQt.png',
-            tertiaryUrl: 'https://i.imgur.com/2Axgdmk.png',
+            secondaryUrls: [
+              'https://i.imgur.com/kAkvJSf.png',
+              'https://i.imgur.com/bsonGQt.png',
+            ],
             category: 'category9',
             name: 'Siegmeyer',
             tags: ['armor', 'darksouls', 'figure'],
           },
           {
             url: 'https://i.imgur.com/V8041YB.png',
-            secondaryUrl: 'https://i.imgur.com/TlJtab6.png',
-            tertiaryUrl: 'https://i.imgur.com/NRW3OMm.png',
+            secondaryUrls: [
+              'https://i.imgur.com/XzJpTMH.png'
+            ],
             category: 'category9',
             name: 'Sif',
             tags: ['wold', 'darksouls', 'tomb', 'rock', 'sword'],
           },
           {
             url: 'https://i.imgur.com/TAsg4tS.png',
-            secondaryUrl: 'https://i.imgur.com/IM75f3t.png',
-            tertiaryUrl: 'https://i.imgur.com/7iudYq4.png',
+            secondaryUrls: [
+              'https://i.imgur.com/aCwcueO.png',
+            ],
             category: 'category9',
             name: 'Charizard',
             tags: ['fire', 'pokemon', 'figure'],
           },
           {
             url: 'https://i.imgur.com/69Y9b5W.png',
-            secondaryUrl: 'https://i.imgur.com/V8041YB.png',
-            tertiaryUrl: 'https://i.imgur.com/TAsg4tS.png',
+            secondaryUrls: [
+              'https://i.imgur.com/HCsDYiI.png',
+            ],
             category: 'category9',
             name: 'Arnold',
             tags: ['predator', 'cigar', 'army', 'figure'],
@@ -149,9 +158,11 @@ function openModal(element) {
   const modalDescription = modal.querySelector('.modal-description');
   const modalSocialMedia = modal.querySelector('.modal-social-media');
 
-  const imageData = JSON.parse(element.dataset.imageData);
-  const imgSrc = imageData.imageUrl;
-  const description = imageData.name;
+  const imgSrc = element.querySelector('img').src;
+  const description = element.querySelector('p').textContent;
+
+  currentImageIndex = imagesData.findIndex((imageData) => imageData.url === imgSrc);
+  currentSecondaryIndex = 0; // Add this line to reset the secondary index when opening the modal
 
   modalImage.src = imgSrc;
   modalDescription.textContent = description;
@@ -162,13 +173,19 @@ function openModal(element) {
 
   modal.style.display = 'block';
 
-  // Prevent background clicks from closing the modal
+  // Handle click events
   modal.onclick = (event) => {
     if (event.target === modal || event.target.id === 'close') {
       closeModal();
+    } else if (event.target.classList.contains('modal-arrow')) {
+      event.stopPropagation();
     }
   };
 }
+
+
+ 
+
 
 
 
@@ -237,27 +254,30 @@ function createSocialMediaButtons() {
 
   return container;
 }
-function nextImage() {
-  const modal = document.getElementById('modal');
-  const modalImage = modal.querySelector('.modal-image');
-  const additionalImages = JSON.parse(modal.dataset.additionalImages);
-  let currentImageIndex = parseInt(modal.dataset.currentImageIndex);
+let currentSecondaryIndex = 0;
 
-  currentImageIndex = (currentImageIndex + 1) % additionalImages.length;
-  modalImage.src = additionalImages[currentImageIndex];
-  modal.dataset.currentImageIndex = currentImageIndex;
+function nextImage(event) {
+  event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
+  const secondaryUrls = imagesData[currentImageIndex].secondaryUrls || [];
+  currentSecondaryIndex = (currentSecondaryIndex + 1) % (secondaryUrls.length + 1);
+  updateModalImage();
 }
 
-function previousImage() {
-  const modal = document.getElementById('modal');
-  const modalImage = modal.querySelector('.modal-image');
-  const additionalImages = JSON.parse(modal.dataset.additionalImages);
-  let currentImageIndex = parseInt(modal.dataset.currentImageIndex);
 
-  currentImageIndex = (currentImageIndex - 1 + additionalImages.length) % additionalImages.length;
-  modalImage.src = additionalImages[currentImageIndex];
-  modal.dataset.currentImageIndex = currentImageIndex;
+function previousImage(event) {
+  event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
+  const secondaryUrls = imagesData[currentImageIndex].secondaryUrls || [];
+  currentSecondaryIndex--;
+
+  if (currentSecondaryIndex < 0) {
+    currentSecondaryIndex = secondaryUrls.length;
+  }
+
+  updateModalImage();
 }
+
+
+
 function createModalArrows() {
   const leftArrow = document.createElement('i');
   leftArrow.classList.add('modal-arrow', 'modal-arrow-left');
@@ -274,4 +294,11 @@ function createModalArrows() {
   });
 
   return [leftArrow, rightArrow];
+}
+function updateModalImage() {
+  const modalImage = document.querySelector('.modal-image');
+  const imageData = imagesData[currentImageIndex];
+  const secondaryUrls = imageData.secondaryUrls || [];
+  const currentSecondaryUrl = currentSecondaryIndex < secondaryUrls.length ? secondaryUrls[currentSecondaryIndex] : imageData.url;
+  modalImage.src = currentSecondaryUrl;
 }

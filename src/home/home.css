@@ -338,3 +338,15 @@ p {
 .gallery-button:hover {
   background-color: #3e8e41;
 }
+.featured h2 {
+  opacity: 0;
+  transform: translateY(100px);
+  animation: move-up 1s forwards;
+}
+@media (max-width: 767px) {
+  .featured h2 {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+  }
+}
