@@ -350,3 +350,53 @@ p {
     animation: none;
   }
 }
+/* Media Queries */
+
+@media screen and (max-width: 1200px) {
+  .content-grid {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .content-grid {
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav ul li {
+    margin-left: 0.5rem;
+  }
+
+  nav ul li a {
+    font-size: 24px;
+  }
+
+  .content-grid {
+    flex-direction: column;
+  }
+
+  .content-item,
+  .bestseller-item {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .logo img {
+    max-width: 120px;
+    height: auto;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  .social-media .social-icon {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 1rem;
+  }
+}
