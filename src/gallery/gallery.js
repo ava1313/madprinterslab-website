@@ -11,29 +11,27 @@
         <option value="category10">Other</option>*/
 
 
-        const imagesData = [
+const imagesData = [
           {
-            url: 'https://i.imgur.com/TlJtab6.png',
-            secondaryUrls: [
-              'https://i.imgur.com/jqV3vJe.png',
-              
+            urls: [
+              'https://i.imgur.com/TlJtab6.png',
+              'https://i.imgur.com/jqV3vJe.png'
             ],
             category: 'category3',
             name: 'Koomba',
             tags: ['super', 'mario', 'keychain', 'super mario'],
           },
           {
-            url: 'https://i.imgur.com/NRW3OMm.png',
-            secondaryUrls: [
-              
+            urls: [
+              'https://i.imgur.com/NRW3OMm.png'
             ],
             category: 'category9',
             name: 'Espeon',
             tags: ['psychic', 'pokemon', 'figure'],
           },
           {
-            url: 'https://i.imgur.com/IM75f3t.png',
-            secondaryUrls: [
+            urls: [
+              'https://i.imgur.com/IM75f3t.png',
               'https://i.imgur.com/Mrlqz8p.png'
             ],
             category: 'category9',
@@ -41,44 +39,61 @@
             tags: ['Dark', 'Darksouls', 'figure'],
           },
           {
-            url: 'https://i.imgur.com/7iudYq4.png',
-            secondaryUrls: [
+            urls: [
+              'https://i.imgur.com/7iudYq4.png',
               'https://i.imgur.com/kAkvJSf.png',
-              'https://i.imgur.com/bsonGQt.png',
+              'https://i.imgur.com/bsonGQt.png'
             ],
             category: 'category9',
             name: 'Siegmeyer',
             tags: ['armor', 'darksouls', 'figure'],
           },
           {
-            url: 'https://i.imgur.com/V8041YB.png',
-            secondaryUrls: [
-              'https://i.imgur.com/XzJpTMH.png'
+            urls: [
+              'https://i.imgur.com/V8041YB.png',
+              'https://i.imgur.com/XzJpTMH.png',
+              'https://i.imgur.com/JZF52rQ.png'
             ],
             category: 'category9',
             name: 'Sif',
             tags: ['wold', 'darksouls', 'tomb', 'rock', 'sword'],
           },
           {
-            url: 'https://i.imgur.com/TAsg4tS.png',
-            secondaryUrls: [
-              'https://i.imgur.com/aCwcueO.png',
+            urls: [
+              'https://i.imgur.com/TAsg4tS.png',
+              'https://i.imgur.com/aCwcueO.png'
             ],
             category: 'category9',
             name: 'Charizard',
             tags: ['fire', 'pokemon', 'figure'],
           },
           {
-            url: 'https://i.imgur.com/69Y9b5W.png',
-            secondaryUrls: [
-              'https://i.imgur.com/HCsDYiI.png',
+            urls: [
+              'https://i.imgur.com/69Y9b5W.png',
+              'https://i.imgur.com/HCsDYiI.png'
             ],
             category: 'category9',
             name: 'Arnold',
             tags: ['predator', 'cigar', 'army', 'figure'],
           }, 
-          
-        ];
+        
+          {
+            urls: [
+              "https://i.imgur.com/TPPIfkR.jpg",
+              "https://i.imgur.com/MaRocAS.jpg",
+              "https://i.imgur.com/E8PFtGN.jpg",
+            ],
+            category: "category9",
+            name: "Sif and dark souls",
+            tags: [
+              "sif",
+              "figures",
+              "figure",
+              "dark souls",
+              "wolf",
+            ],
+          }];
+        
         
 document.addEventListener('DOMContentLoaded', function () {
   loadImages();
@@ -94,20 +109,20 @@ function loadImages() {
   const galleryGrid = document.querySelector('.gallery-grid');
   imagesData.forEach((imageData) => {
     const galleryItem = createGalleryItem(
-      imageData.url,
+      imageData.urls[0],
       imageData.category,
       imageData.name,
       imageData.tags
     );
     galleryGrid.appendChild(galleryItem);
   });
-  lazyLoadImages();
+  
 }
 
 
 function createGalleryItem(imageUrl, itemCategory, imageName, tags) {
   const galleryItem = document.createElement('div');
-  galleryItem.classList.add('gallery-item');
+  galleryItem.classList.add('gallery-item', 'col-12', 'col-sm-6', 'col-md-4', 'col-lg-3');
   galleryItem.setAttribute('data-category', itemCategory);
   galleryItem.setAttribute('data-tags', tags.join(','));
   galleryItem.setAttribute('onclick', 'openModal(this)');
@@ -125,6 +140,7 @@ function createGalleryItem(imageUrl, itemCategory, imageName, tags) {
 
   return galleryItem;
 }
+
 
 
 
@@ -162,8 +178,8 @@ function openModal(element) {
   const imgSrc = element.querySelector('img').src;
   const description = element.querySelector('p').textContent;
 
-  currentImageIndex = imagesData.findIndex((imageData) => imageData.url === imgSrc);
-  currentSecondaryIndex = 0; // Add this line to reset the secondary index when opening the modal
+  currentImageIndex = imagesData.findIndex((imageData) => imageData.urls[0] === imgSrc);
+  currentIndex = 0; // Add this line to reset the secondary index when opening the modal
 
   modalImage.src = imgSrc;
   modalDescription.textContent = description;
@@ -204,29 +220,7 @@ modal.querySelector('.modal-description').appendChild(socialMediaButtons);
 document.getElementById('close').addEventListener('click', closeModal);
 document.getElementById('modal').addEventListener('click', closeModal);
 
-function lazyLoadImages() {
-  const images = document.querySelectorAll('.gallery-item img[data-src]');
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1,
-  };
 
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        return;
-      }
-
-      const img = entry.target;
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
-      observer.unobserve(img);
-    });
-  }, options);
-
-  images.forEach(img => observer.observe(img));
-}
 function createSocialMediaButtons() {
   const container = document.createElement('div');
   container.className = 'social-media-buttons';
@@ -255,23 +249,27 @@ function createSocialMediaButtons() {
 
   return container;
 }
-let currentSecondaryIndex = 0;
+let currentIndex = 0;
 
 function nextImage(event) {
   event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
-  const secondaryUrls = imagesData[currentImageIndex].secondaryUrls || [];
-  currentSecondaryIndex = (currentSecondaryIndex + 1) % (secondaryUrls.length + 1);
+  const urls = imagesData[currentImageIndex].urls || [];
+  currentIndex++;
+
+  if (currentIndex >= urls.length) {
+    currentIndex = 0;
+  }
   updateModalImage();
 }
 
 
 function previousImage(event) {
   event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
-  const secondaryUrls = imagesData[currentImageIndex].secondaryUrls || [];
-  currentSecondaryIndex--;
+  const urls = imagesData[currentImageIndex].urls || [];
+  currentIndex--;
 
-  if (currentSecondaryIndex < 0) {
-    currentSecondaryIndex = secondaryUrls.length;
+  if (currentIndex < 0) {
+    currentIndex = urls.length-1;
   }
 
   updateModalImage();
@@ -299,7 +297,7 @@ function createModalArrows() {
 function updateModalImage() {
   const modalImage = document.querySelector('.modal-image');
   const imageData = imagesData[currentImageIndex];
-  const secondaryUrls = imageData.secondaryUrls || [];
-  const currentSecondaryUrl = currentSecondaryIndex < secondaryUrls.length ? secondaryUrls[currentSecondaryIndex] : imageData.url;
-  modalImage.src = currentSecondaryUrl;
+  const urls = imageData.urls || [];
+  const curentUrl = urls[currentIndex];
+  modalImage.src = curentUrl;
 }
