@@ -2,88 +2,88 @@
 <html lang="en">
 
 <head>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="home.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Home</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-          <a href="../../index.html" class="logo">
-            <img src="../../assets/Logo.png">
-          </a>
-          
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="../gallery/gallery.html">Gallery</a></li>
-              </ul>
-        </nav>
-    </header>
-    <main>
-       
-        <section class="featured-content">
-          <h2>Featured Content</h2>
-          <div class="content-grid">
-              <div class="content-item" onclick="openModal(this)">
-                  <img src="https://i.imgur.com/IM75f3t.png" alt="Solaire">
-                  <p>Solaire</p>
-              </div>
-              <div class="content-item" onclick="openModal(this)">
-                  <img src="https://i.imgur.com/NIrrVFe.png" alt="Great Grey Wolf Sif">
-                  <p>Great Grey Wolf Sif</p>
-              </div>
-              <div class="content-item" onclick="openModal(this)">
-                  <img src="https://i.imgur.com/7iudYq4.png" alt="Siegmeyer">
-                  <p>Siegmeyer</p>
-              </div>
-          </div>
-          <a href="../gallery/gallery.html" class="gallery-button">View Gallery</a>
-      </section>
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <a href="../../index.html" class="navbar-brand">
+        <img src="../../assets/Logo.png">
+      </a>
       
-          
-          <section class="bestseller">
-            <h2>   </h2>
-            <div class="bestseller-container">
-              <div class="bestseller-item" onclick="openModal(this)">
-                <p>This Month's Bestseller</p>
-                <img src="https://i.imgur.com/lWYmsfL.png" alt="Charizard">
-                <p>   </p>
-                <p>Charizard</p>
-              </div>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="../home/home.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="../gallery/gallery.html" class="nav-link">Gallery</a></li>
+      </ul>
+    </nav>
+  </header>
+    <main>
+        <section class="featured-content">
+            <h2>Featured Content</h2>
+            <div class="content-grid">
+                <div class="content-item" onclick="openModal(this)">
+                    <img src="https://i.imgur.com/PYbDV0v.png" alt="Solaire">
+                    <p>Solaire</p>
+                </div>
+                <div class="content-item" onclick="openModal(this)">
+                    <img src="https://i.imgur.com/IHF8xPB.png" alt="Great Grey Wolf Sif">
+                    <p>Great Grey Wolf Sif</p>
+                </div>
+                <div class="content-item" onclick="openModal(this)">
+                    <img src="https://i.imgur.com/YsKGk1z.png" alt="Siegmeyer">
+                    <p>Siegmeyer</p>
+                </div>
             </div>
-          </section>
-          
-          
-          
-          <section class="social-media">
+            <a href="../gallery/gallery.html" class="gallery-button">View Gallery</a>
+        </section>
+
+        <section class="bestseller">
+            <h2></h2>
+            <div class="bestseller-container">
+                <div class="bestseller-item" onclick="openModal(this)">
+                    <p>This Month's Bestseller</p>
+                    <img src="https://i.imgur.com/3dDZ8RJ.png" alt="Charizard">
+                    <p></p>
+                    <p>Charizard</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-media">
             <h2>Follow us on Social Media</h2>
             <ul>
                 <li><a href="https://www.facebook.com/marketplace/profile/100087950613870" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a></li>
                 <li><a href="https://www.tiktok.com/@madprinterslab" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a></li>
                 <li><a href="https://www.instagram.com/madprinterslab/" class="social-icon instagram"><i class="fab fa-instagram"></i></a></li>
-            </ul>
-        </section>
-        <section class="email">
-            <h1>Contact us</h1>
-            <p>Feel free to reach out to us at: <a href="mailto:themadprinters3d@gmail.com" class="email-link">themadprinters3d@gmail.com</a></p>
-        </section>
-        
-      
-    </main>
-    <!-- Add the modal from the gallery page -->
-    <div id="modal" class="modal">
-        <span id="close" class="close">&times;</span>
-        <img class="modal-image" src="" alt="">
-        <div class="modal-caption">
-            <p class="modal-description"></p>
-        </div>
-    </div>
-    <script src="home.js"></script>
-</body>
-
-</html>
+              </ul>
+          </section>
+          <section class="email">
+              <h1>Contact us</h1>
+              <p>Feel free to reach out to us at: <a href="mailto:themadprinters3d@gmail.com" class="email-link">themadprinters3d@gmail.com</a></p>
+          </section>
+      </main>
+      <!-- Add the modal from the gallery page -->
+      <div id="modal" class="modal">
+          <span id="close" class="close">&times;</span>
+          <img class="modal-image" src="" alt="">
+          <div class="modal-caption">
+              <p class="modal-description"></p>
+          </div>
+      </div>
+      <script src="home.js"></script>
+  </body>
+  
+  </html>
+  

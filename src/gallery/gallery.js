@@ -77,22 +77,8 @@ const imagesData = [
             tags: ['predator', 'cigar', 'army', 'figure'],
           }, 
         
-          {
-            urls: [
-              "https://i.imgur.com/TPPIfkR.jpg",
-              "https://i.imgur.com/MaRocAS.jpg",
-              "https://i.imgur.com/E8PFtGN.jpg",
-            ],
-            category: "category9",
-            name: "Sif and dark souls",
-            tags: [
-              "sif",
-              "figures",
-              "figure",
-              "dark souls",
-              "wolf",
-            ],
-          }];
+         
+          ];
         
         
 document.addEventListener('DOMContentLoaded', function () {
@@ -262,18 +248,18 @@ function nextImage(event) {
   updateModalImage();
 }
 
-
 function previousImage(event) {
   event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
   const urls = imagesData[currentImageIndex].urls || [];
   currentIndex--;
 
   if (currentIndex < 0) {
-    currentIndex = urls.length-1;
+    currentIndex = urls.length - 1;
   }
 
   updateModalImage();
 }
+
 
 
 
@@ -301,3 +287,16 @@ function updateModalImage() {
   const curentUrl = urls[currentIndex];
   modalImage.src = curentUrl;
 }
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 100) {
+    backToTopButton.style.display = 'block';
+  } else {
+    backToTopButton.style.display = 'none';
+  }
+});
+
+backToTopButton.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
