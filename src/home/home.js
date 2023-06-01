@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const closeButton = document.querySelector(".close");
   closeButton.addEventListener("click", closeModal);
 
-  // Add these lines to enable modal for featured content and bestseller images
+
   const featuredContentItems = document.querySelectorAll(".content-item");
   featuredContentItems.forEach((item) => {
     item.addEventListener("click", () => openModal(item));

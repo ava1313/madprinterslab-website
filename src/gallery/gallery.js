@@ -165,14 +165,14 @@ function openModal(element) {
   const description = element.querySelector('p').textContent;
 
   currentImageIndex = imagesData.findIndex((imageData) => imageData.urls[0] === imgSrc);
-  currentIndex = 0; // Add this line to reset the secondary index when opening the modal
+  currentIndex = 0; 
 
   modalImage.src = imgSrc;
   modalDescription.textContent = description;
 
   const socialMediaButtons = createSocialMediaButtons();
-  modalSocialMedia.innerHTML = ''; // Clear any existing social media buttons
-  modalSocialMedia.appendChild(socialMediaButtons); // Add new social media buttons
+  modalSocialMedia.innerHTML = ''; 
+  modalSocialMedia.appendChild(socialMediaButtons);
 
   modal.style.display = 'block';
 
@@ -202,7 +202,7 @@ modal.querySelector('.modal-description').appendChild(socialMediaButtons);
 }
 
 
-// Add event listeners for close button and modal background click
+
 document.getElementById('close').addEventListener('click', closeModal);
 document.getElementById('modal').addEventListener('click', closeModal);
 
@@ -238,7 +238,7 @@ function createSocialMediaButtons() {
 let currentIndex = 0;
 
 function nextImage(event) {
-  event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
+  event.stopPropagation(); 
   const urls = imagesData[currentImageIndex].urls || [];
   currentIndex++;
 
@@ -249,7 +249,7 @@ function nextImage(event) {
 }
 
 function previousImage(event) {
-  event.stopPropagation(); // Prevent the click event from propagating to the parent modal element
+  event.stopPropagation(); 
   const urls = imagesData[currentImageIndex].urls || [];
   currentIndex--;
 

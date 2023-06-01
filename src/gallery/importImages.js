@@ -1,4 +1,4 @@
-/* node importImages.js*/
+
 
 
 const fs = require('fs');
